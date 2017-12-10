@@ -1,5 +1,7 @@
 package org.unistacks.vo;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * @author Gyges Zean
  * @date 2017/12/9
@@ -43,5 +45,16 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("title", title)
+                .add("author", author)
+                .toString();
     }
 }
