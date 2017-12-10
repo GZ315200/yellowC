@@ -1,4 +1,4 @@
-package com.unistack.tamboo.utils;
+package org.unistacks.utils;
 
 import com.google.common.base.MoreObjects;
 

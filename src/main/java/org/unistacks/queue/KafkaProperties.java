@@ -14,16 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kafka.examples;
+package org.unistacks.queue;
 
 public class KafkaProperties {
-    public static final String TOPIC = "igeek";
-    public static final String KAFKA_SERVER_URL = "192.168.1.202";
+    public static final String TOPIC = "tamboo_sanitycheck";
+    public static final String KAFKA_SERVER_URL = "192.168.1.193";
     public static final int KAFKA_SERVER_PORT = 9092;
     public static final int KAFKA_PRODUCER_BUFFER_SIZE = 64 * 1024;
     public static final int CONNECTION_TIMEOUT = 100000;
-    public static final String TOPIC2 = "topic2";
-    public static final String TOPIC3 = "topic3";
+    public static final String TOPIC2 = "tamboo_consumer_metrics";
+    public static final String TOPIC3 = "tamboo_client_metrics";
     public static final String CLIENT_ID = "SimpleConsumerDemoClient";
 
     private KafkaProperties() {}

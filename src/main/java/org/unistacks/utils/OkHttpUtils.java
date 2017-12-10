@@ -1,6 +1,5 @@
-package com.unistack.tamboo.utils;
+package org.unistacks.utils;
 
-import com.unistack.tamboo.exception.GeneralServiceException;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,7 +166,7 @@ public class OkHttpUtils {
                 public void onFailure(Call call, IOException e) {
                     LOGGER.error(e.getMessage(), e);
                     LOGGER.info(String.valueOf(request));
-                    throw new GeneralServiceException(request.toString(), e);
+                    throw new RuntimeException(request.toString(), e);
                 }
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
@@ -178,7 +177,7 @@ public class OkHttpUtils {
                 }
             });
         }catch (Exception e) {
-        throw new GeneralServiceException(e);
+        throw new RuntimeException(e);
     }
 
     }
@@ -207,7 +206,7 @@ public class OkHttpUtils {
             }
         } catch (Exception e) {
             String msg = MessageFormat.format("请求异常,url:{0},params:-,reponse:{1}", url, result);
-            throw new GeneralServiceException(msg, e);
+            throw new RuntimeException(msg, e);
         } finally {
             LOGGER.debug("此次调用时长为" + (System.currentTimeMillis() - start));
         }

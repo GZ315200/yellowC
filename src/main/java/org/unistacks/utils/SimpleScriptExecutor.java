@@ -1,6 +1,6 @@
-package com.unistack.tamboo.utils;
+package org.unistacks.utils;
 
-import com.unistack.tamboo.common.PropertiesUtil;
+
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -14,7 +14,7 @@ import java.io.*;
 public class SimpleScriptExecutor {
 
     private static final Logger log = Logger.getLogger(SimpleScriptExecutor.class);
-    private static final String DEFAULT_SCRIPT_FOLDER = PropertiesUtil.getScriptFolder();
+    private static final String DEFAULT_SCRIPT_FOLDER ="";
 
     private SimpleScriptExecutor() {
     }

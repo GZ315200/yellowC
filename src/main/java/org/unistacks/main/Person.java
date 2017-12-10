@@ -10,6 +10,10 @@ import org.inferred.freebuilder.FreeBuilder;
 public interface Person {
 
     String name();
+
     int age();
 
+    class Builder extends org.unistacks.main.Person_Builder { }
+
 }
+

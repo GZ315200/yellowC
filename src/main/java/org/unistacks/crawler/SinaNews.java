@@ -22,8 +22,7 @@ import java.util.regex.Pattern;
 public class SinaNews {
 
 
-    private String cookie = "SINAGLOBAL=172.16.118.87_1504175045.466669; Apache=172.16.118.87_1504175045.466671; SCF=AlsENNiGFEx_SCALoytk9AhNGPsj8YCpuYoZRuIT9mJM_1M61zDawHK6Lwi1frTCd1O-mreJWuNmF3-cVsBQrF8.; sso_info=v02m6alo5qztKWRk6SlkKSIpY6ElKWRk5ClkKOgpY6EhKadlqWkj5OMtI2DiLaOk5C5jLOAwA==; SUB=_2A250qLM6DeRhGeVK71AX-SrFyDyIHXVX36PyrDV_PUNbm9ANLXb5kW9KsvATKVgBeBT5NcA_jFWTVZRZVQ..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFqI2X-jj5hxmjr8.wAV1UI5NHD95Q0ShBESo.X1Ke7Ws4Dqcjgi--4i-iFiKy8i--Xi-zRiKyWPNq_Untt; ALF=1536030442; UOR=www.google.co.jp,finance.sina.com.cn,; ULV=1504494677175:1:1:1:172.16.118.87_1504175045.466671:; U_TRS1=000000a6.493b2af.59acc454.8b2dc10d; U_TRS2=000000a6.49522af.59acc454.f008ee87; lxlrttp=1504173940; WEB2_OTHER=52b637eaebf281843595658dcc054079";
-    private String host = "search.sina.com.cn";
+    private String host = "www.fortunechina.com";
     private String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
 
 
@@ -89,7 +88,6 @@ public class SinaNews {
                         .toString();
                 document = Jsoup.connect(url)
                         .header("host", host)
-                        .header("Cookie", cookie)
                         .header("Referer",referer)
                         .header("User-Agent", userAgent)
                         .timeout(30 * 1000)
@@ -191,7 +189,7 @@ public class SinaNews {
             ObjectMapper objectMapper = new ObjectMapper();
             String value = objectMapper.writeValueAsString(news);
             System.out.println(value);
-            producer.sentMessage(value,messageNo,"igeek",isAsync);
+//            producer.sentMessage(value,messageNo,"igeek",isAsync);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
