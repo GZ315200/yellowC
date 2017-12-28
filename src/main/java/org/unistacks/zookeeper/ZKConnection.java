@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ZKConnection {
 
-    protected String hosts = "192.168.1.202:2181";
+    protected String hosts = "192.168.1.217:2181";
 
     private static final int SESSION_TIMEOUT = 5000;
     private CountDownLatch connectedSignal = new CountDownLatch(1);
@@ -41,7 +41,7 @@ public class ZKConnection {
 
     public static void main(String[] args) throws Exception {
         ZKConnection connection = new ZKConnection();
-        connection.connect();;
+        connection.connect();
     }
 
 

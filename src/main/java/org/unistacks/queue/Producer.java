@@ -4,7 +4,10 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.security.JaasUtils;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import java.net.URL;
 import java.time.Clock;
 import java.util.Properties;
 import java.util.Random;
@@ -18,11 +21,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class Producer {
 
+    private static final String JAAS_NAME = "kafka_client_jaas.conf";
+
     public void sentMessage(String messageStr, String messageNo, String topic, boolean isAsync) {
         Properties props = new Properties();
         props.put("bootstrap.servers", KafkaProperties.KAFKA_SERVER_URL + ":" + KafkaProperties.KAFKA_SERVER_PORT);
-        props.put("client.id", "DemoProducer");
+        props.put("client.id", "DemoProducer" + System.currentTimeMillis() / 1000);
+//        props.put("security.protocol", "SASL_PLAINTEXT");
+//        props.put("sasl.mechanism", "PLAIN");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        props.put("sasl.jaas.config","/Users/mazean/project/igeek/src/main/java/org/unistacks/kafka_client_jaas.conf");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         KafkaProducer producer = new KafkaProducer(props);
         Clock clock = Clock.systemUTC();
@@ -69,8 +77,12 @@ public class Producer {
     }
 
 
-    public static void main(String[] args) {
 
+
+
+    public static void main(String[] args) {
+//        Producer producer = new Producer();
+//        producer.getPath();
 //        GenericDataModel gdm = new GenericDataModel();
 //        gdm.setEntityName(KafkaProperties.TOPIC);
 //        byte[] b = new byte[200];
@@ -83,20 +95,22 @@ public class Producer {
 //        gm.setObjectBytes(ss.serializeGDMList(gdmList));
 //        System.out.println(gm.getObjectBytes());
 
+//
         Producer producer = new Producer();
-
+//        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM,KafkaProperties.getPath());
+//
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-
-        executorService.scheduleAtFixedRate(()-> {
-                        for (int i = 0; i < 10; i++) {
-                            String key = Math.abs(i + new Random(1).nextInt()) + "";
-                            producer.sentMessage("hello,world", key, KafkaProperties.TOPIC, true);
-                        }
-                    },100,10*1000,TimeUnit.MILLISECONDS);
-                     System.out.println("send finished");
-                }
-
-
+//
+        executorService.scheduleAtFixedRate(() -> {
+            for (int i = 0; i < 10; i++) {
+                String key = Math.abs(i + new Random(1).nextInt()) + "";
+                producer.sentMessage("hello,world", key, KafkaProperties.TOPIC, true);
+            }
+        }, 100, 10 * 1000, TimeUnit.MILLISECONDS);
+        System.out.println("send finished");
+//                }
+//
+//
 //    @SuppressWarnings("rawtypes")
 //    private static ProducerRecord getKeyedMessage(GenericMessage msg) throws Exception {
 //        KafkaSerializer serializer = KafkaSerializerFactory.getSerializer();
@@ -115,6 +129,6 @@ public class Producer {
 //        }
 //        return new ProducerRecord<>("a.topic", messageGroupId.getBytes(), serializedMsg);
 //
-//    }
-
     }
+
+}

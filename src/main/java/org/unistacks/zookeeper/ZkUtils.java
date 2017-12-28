@@ -11,8 +11,8 @@ import java.util.concurrent.CountDownLatch;
 public class ZkUtils implements Watcher {
 
     private static final int SESSION_TIMEOUT = 10000;
-    private static final String CONNECTION_STRING = "192.168.1.202:2181";
-    private static final String ZK_PATH = "/brokers";
+    private static final String CONNECTION_STRING = "192.168.1.217:2181";
+    private static final String ZK_PATH = "/brokers/ids";
     private ZooKeeper zk = null;
 
     private CountDownLatch connectedSemaphore = new CountDownLatch(1);
@@ -110,10 +110,7 @@ public class ZkUtils implements Watcher {
     public static void main(String[] args) {
         ZkUtils zkUtils = new ZkUtils();
         zkUtils.createConnection(CONNECTION_STRING,SESSION_TIMEOUT);
-        if (zkUtils.createPath(ZK_PATH,"初始节点")) {
-            System.out.println(zkUtils.readData(ZK_PATH));
-            zkUtils.writeData(ZK_PATH,"更新后的数据");
-        }
+        zkUtils.readData(ZK_PATH);
         zkUtils.releaseConnection();
     }
 
