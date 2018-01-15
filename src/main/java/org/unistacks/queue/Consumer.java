@@ -75,8 +75,8 @@ public class Consumer implements Runnable {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "60000");
-//        props.put("security.protocol", "SASL_PLAINTEXT");
-//        props.put("sasl.mechanism", "PLAIN");
+        props.put("security.protocol", "SASL_PLAINTEXT");
+        props.put("sasl.mechanism", "PLAIN");
 //        props.put("sasl.jaas.config","/Users/mazean/project/igeek/src/main/java/org/unistacks/kafka_client_jaas.conf");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
@@ -85,7 +85,7 @@ public class Consumer implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-//        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM, KafkaProperties.getPath());
+        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM, KafkaProperties.getPath());
         String groupId = "tamboo_ok" + System.currentTimeMillis() / 1000;//ESBridge
         Properties props = createConsumerConfig(groupId);
         Consumer example = new Consumer(props, KafkaProperties.TOPIC);

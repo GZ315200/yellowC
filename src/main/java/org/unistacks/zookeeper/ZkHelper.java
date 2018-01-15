@@ -53,7 +53,9 @@ public class ZkHelper {
 
     public static void main(String[] args) {
 
-        ZkUtils zkUtils = getZkUtils("192.168.1.217:2181");
+
+
+        ZkUtils zkUtils = getZkUtils("192.168.1.193:2181");
         StringBuilder bootstrapServers = new StringBuilder();
         for (Broker broker : JavaConversions.asJavaIterable(zkUtils.getAllBrokersInCluster()))
         {
@@ -70,6 +72,8 @@ public class ZkHelper {
 
         System.out.println(bootstrapServers.deleteCharAt(bootstrapServers.length() - 1).toString());
 
+
+//        zkUtils.getChildren()
 //        ZkHelper zkHelper = new ZkHelper();
 //        ZkClient zkClient = zkHelper.getZkClient("192.168.1.217:2181");
 //        List<String> child = zkClient.getChildren("/brokers/ids");

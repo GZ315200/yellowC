@@ -27,8 +27,8 @@ public class Producer {
         Properties props = new Properties();
         props.put("bootstrap.servers", KafkaProperties.KAFKA_SERVER_URL + ":" + KafkaProperties.KAFKA_SERVER_PORT);
         props.put("client.id", "DemoProducer" + System.currentTimeMillis() / 1000);
-//        props.put("security.protocol", "SASL_PLAINTEXT");
-//        props.put("sasl.mechanism", "PLAIN");
+        props.put("security.protocol", "SASL_PLAINTEXT");
+        props.put("sasl.mechanism", "PLAIN");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 //        props.put("sasl.jaas.config","/Users/mazean/project/igeek/src/main/java/org/unistacks/kafka_client_jaas.conf");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -97,7 +97,7 @@ public class Producer {
 
 //
         Producer producer = new Producer();
-//        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM,KafkaProperties.getPath());
+        System.setProperty(JaasUtils.JAVA_LOGIN_CONFIG_PARAM,KafkaProperties.getPath());
 //
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 //
